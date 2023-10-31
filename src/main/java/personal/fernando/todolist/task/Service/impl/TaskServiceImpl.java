@@ -1,11 +1,16 @@
 package personal.fernando.todolist.task.Service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import jakarta.servlet.http.HttpServletRequest;
 import personal.fernando.todolist.task.TaskModel;
 import personal.fernando.todolist.task.TaskRepository;
 import personal.fernando.todolist.task.Service.TaskService;
 
+@Service
 public class TaskServiceImpl implements TaskService{
 
     @Autowired
@@ -19,19 +24,23 @@ public class TaskServiceImpl implements TaskService{
         return repository.save(taskModel);
     }
 
-
-
     @Override
-    public TaskModel alter(Long id) {
-        var taskToAlter = repository.findById(id);
-        
-
+    public TaskModel update(TaskModel taskModel, Long id, HttpServletRequest request) {
+        taskModel.setId(id);
+        return repository.save(taskModel);
     }
 
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repository.deleteById(id);
     }
+
+    @Override
+    public Optional<TaskModel> findById(Long id) {
+        return repository.findById(id);
+        
+    }
+
+    
     
 }
