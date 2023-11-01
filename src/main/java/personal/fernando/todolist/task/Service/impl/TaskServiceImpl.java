@@ -1,5 +1,7 @@
 package personal.fernando.todolist.task.Service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +19,17 @@ public class TaskServiceImpl implements TaskService{
     private TaskRepository repository;
 
     @Override
-    public TaskModel create(TaskModel taskModel) {
+    public TaskModel create(TaskModel taskModel, HttpServletRequest request) {
         if (taskModel == null) {
             throw new IllegalArgumentException();
         }
+        var user = request.getAttribute("userId");
+        taskModel.setUserId((Long) user);
         return repository.save(taskModel);
     }
 
     @Override
-    public TaskModel update(TaskModel taskModel, Long id, HttpServletRequest request) {
+    public TaskModel update(TaskModel taskModel, Long id) {
         taskModel.setId(id);
         return repository.save(taskModel);
     }
@@ -36,11 +40,9 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public Optional<TaskModel> findById(Long id) {
-        return repository.findById(id);
-        
+    public List<TaskModel> findAll() {
+        System.out.println(repository.findAll());
+        return repository.findAll();
     }
-
-    
-    
+ 
 }
