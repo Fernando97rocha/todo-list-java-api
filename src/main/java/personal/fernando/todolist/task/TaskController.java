@@ -36,7 +36,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public HttpStatus update(@ResquestBody TaskModel taskModel, @PathVariable Long id) {
+    public HttpStatus update(@RequestBody TaskModel taskModel, @PathVariable Long id) {
         service.update(taskModel, id);
         return HttpStatus.ACCEPTED;
     }

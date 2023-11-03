@@ -30,8 +30,12 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public TaskModel update(TaskModel taskModel, Long id) {
-        taskModel.setId(id);
-        return repository.save(taskModel);
+        TaskModel task = repository.findById(id).get();
+        task.setId(id);
+        task.setUserId(taskModel.getUserId());
+        task.setDescription(taskModel.getDescription());
+        task.setCreatedAt(taskModel.getCreatedAt());
+        return repository.save(task);
     }
 
     @Override
