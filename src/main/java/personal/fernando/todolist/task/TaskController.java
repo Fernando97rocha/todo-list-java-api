@@ -28,7 +28,7 @@ public class TaskController {
         service.create(taskModel, request);
         return HttpStatus.CREATED;
     }
-
+    
     @DeleteMapping("/{id}")
     public HttpStatus delete(@PathVariable Long id) {
         service.delete(id);
@@ -36,7 +36,8 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public HttpStatus update(@RequestBody TaskModel taskModel, @PathVariable Long id) {
+    public HttpStatus update(@RequestBody TaskModel taskModel, @PathVariable Long id, @PathVariable Long userName) {
+
         service.update(taskModel, id);
         return HttpStatus.ACCEPTED;
     }

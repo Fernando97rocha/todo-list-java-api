@@ -43,7 +43,6 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public List<TaskModel> findAll() {
-        System.out.println(repository.findAll());
         return repository.findAll();
     }
  
